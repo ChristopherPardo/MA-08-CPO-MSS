@@ -19,100 +19,122 @@ go
 
 create table Fighters (
 	id int NOT NULL PRIMARY KEY,
-	LastName varchar(30),
-	FirstName varchar(30),
+	LastName varchar(30)NOT NULL,
+	FirstName varchar(30)NOT NULL,
 	Alias varchar(30),
-	Weight int NOT NULL
-	heigh int NOT NULL	
-	reach int NOT NULL
-	PersonalInformations_idPersonalInformations int FOREIGN KEY REFERENCES PersonalInformations(idPersonalInformations)
-	Styles_idStyles int FOREIGN KEY REFERENCES Styles(idStyles)
-	Clubs_idClubs int FOREIGN KEY REFERENCES PersonalInformations(idPersonalInformations)
-
+	Weight int NOT NULL,
+	heigh int NOT NULL	,
+	reach int NOT NULL,
+	PersonalInformations_id int FOREIGN KEY REFERENCES PersonalInformations(id),
+	Styles_id int FOREIGN KEY REFERENCES Styles(id),
+	Clubs_id int FOREIGN KEY REFERENCES PersonalInformations(id),
+	Gears_id int FOREIGN KEY REFERENCES Gears(id),
+	Status_id int FOREIGN KEY REFERENCES Status(id),
+	Age int NOT NULL,
+	Address varchar(45)NOT NULL,
+	Tel_Number int ,
+	Salary int
+	
 )
 
 create table Sponsors (
-    idCategorises int NOT NULL PRIMARY KEY,
-	Name varchar(45) NOT NULL UNIQUE
+    id int NOT NULL PRIMARY KEY,
+	Name varchar(30) NOT NULL ,
+	Office varchar(30) NOT NULL ,
+	Reference_Number varchar(30) NOT NULL 
 )
 
 create table Fighters_has_Sponsors (
-	 Customers_idCustomers int FOREIGN KEY REFERENCES Customers(idCustomers),
-   Categorises_idCategorises int FOREIGN KEY REFERENCES Categorises(idCategorises)
+   Fighters_id int FOREIGN KEY REFERENCES Fighters(id),
+   Sponsors_id int FOREIGN KEY REFERENCES Sponsors(id)
 )
 
 create table Contests (
-    idCategorises int NOT NULL PRIMARY KEY,
-	Name varchar(45) NOT NULL UNIQUE
+    id int NOT NULL PRIMARY KEY,
+	Participation_Number int NOT NULL UNIQUE,
+	Date_Constest date NOT NULL UNIQUE
 )
 
 create table Contests_has_Fighters (
-	 Customers_idCustomers int FOREIGN KEY REFERENCES Customers(idCustomers),
-   Categorises_idCategorises int FOREIGN KEY REFERENCES Categorises(idCategorises)
+	Fighters_id int FOREIGN KEY REFERENCES Fights(id),
+	Contests_id int FOREIGN KEY REFERENCES Contests(id)
 )
 
 create table Categories (
-    idCategorises int NOT NULL PRIMARY KEY,
+	id int NOT NULL PRIMARY KEY,
 	Name varchar(45) NOT NULL UNIQUE
 )
 
 create table Fighters_has_Categories (
-	 Customers_idCustomers int FOREIGN KEY REFERENCES Customers(idCustomers),
-   Categorises_idCategorises int FOREIGN KEY REFERENCES Categorises(idCategorises)
+   Fighters_id int FOREIGN KEY REFERENCES Fighters(id),
+   Categories_id int FOREIGN KEY REFERENCES Categories(id))
 )
 
 create table Fights (
-    idCategorises int NOT NULL PRIMARY KEY,
-	Name varchar(45) NOT NULL UNIQUE
+    id int NOT NULL PRIMARY KEY,
+	Number_fight int NOT NULL UNIQUE,
+	contry varchar(45),
+	town varchar(45),
+	address varchar(45),
+	date_fight date,
+	category varchar(45)
+	loser varchar(45),
+	winner varchar(45),
+	Sport_type varchar(45),
+	Result_fight varchar(45),
+	Title_idTitle int FOREIGN KEY REFERENCES Title(idTitle)
+	
 )
 
 create table Fighters_has_Fights (
-	 Customers_idCustomers int FOREIGN KEY REFERENCES Customers(idCustomers),
-   Categorises_idCategorises int FOREIGN KEY REFERENCES Categorises(idCategorises)
+	Fighters_id int FOREIGN KEY REFERENCES Fighters(id),
+    Fight_id int FOREIGN KEY REFERENCES Fight(id)
 )
 
 create table Statistics (
-    idCategorises int NOT NULL PRIMARY KEY,
-	Name varchar(45) NOT NULL UNIQUE
+    id int NOT NULL PRIMARY KEY,
+	KO int,
+	TKO int ,
+	Declassification int, 
+	Split_Decision int, 
+	Submission int, 
+	Rank_Fighter int NOT NULL
 )
 
 create table Fighters_has_Statistics (
-	 Customers_idCustomers int FOREIGN KEY REFERENCES Customers(idCustomers),
-     Categorises_idCategorises int FOREIGN KEY REFERENCES Categorises(idCategorises)
+    Fight_id int FOREIGN KEY REFERENCES Fight(id),
+    Statistics_id int FOREIGN KEY REFERENCES Statistics(id)
 )
 create table Titles (
-	idStates int NOT NULL PRIMARY KEY,
-	Name varchar(50) NOT NULL UNIQUE
+	id int NOT NULL PRIMARY KEY,
+	Name varchar(30) NOT NULL UNIQUE,
+	Nb_times int ,
+	Date_title date
 )
 
 create table Styles (
-	idOrders int NOT NULL PRIMARY KEY,
-	Nb_Orders int NOT NULL UNIQUE,
-  Dates datetime
-  Customers_idCustomers int FOREIGN KEY REFERENCES Customers(idCustomers),
-  States_idStates int FOREIGN KEY REFERENCES States(idStates)
+	id int NOT NULL PRIMARY KEY,
+	Name varchar(45) NOT NULL,
+	Level_Style varchar(45)
+
+
 
 )
 
 create table Gears (
-	idProducts int NOT NULL PRIMARY KEY,
-	Nb_Products int NOT NULL,
-  Braind varchar(30),
-	Model varchar(30),
-	Description varchar(100),
-	Price int,
-	Nb_Pieces int
+	id int NOT NULL PRIMARY KEY,
+	Type_Gear varchar(45),
+	Brand varchar(30),
+	Serial_Number varchar(30)
 )
 
-create table PersonalInformations (
-	Orders_idOrders int FOREIGN KEY REFERENCES Orders(idOrders),
-  Products_idProducts int FOREIGN KEY REFERENCES Products(idProducts)
-)
+
 
 create table Clubs (
-  idPromotions int NOT NULL PRIMARY KEY,
-  Name varchar(45) NOT NULL UNIQUE,
-  Percentage int
+	 id int NOT NULL PRIMARY KEY,
+	 Name varchar(45) NOT NULL,
+	 Licence_Number varchar(45) NOT NULL UNIQUE,
+	 Seniority DATE
 )
 
 
