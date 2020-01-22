@@ -23,14 +23,13 @@ create table Styles (
 	id int NOT NULL PRIMARY KEY,
 	Name varchar(45) NOT NULL,
 	Level_Style varchar(45)
-
 )
 
 create table Gears (
 	id int NOT NULL PRIMARY KEY,
 	Type_Gear varchar(45),
 	Brand varchar(30),
-	Serial_Number varchar(30)
+	Serial_Number varchar(20)
 )
 
 create table "Statistics" (
@@ -43,22 +42,29 @@ create table "Statistics" (
 	Rank_Fighter int NOT NULL
 )
 
+create table Clubs (
+	 id int NOT NULL PRIMARY KEY,
+	 Name varchar(45) NOT NULL,
+	 Licence_Number varchar(45) NOT NULL UNIQUE,
+	 Seniority DATE
+)
+
 create table Fighters (
 	id int NOT NULL PRIMARY KEY,
 	LastName varchar(30)NOT NULL,
 	FirstName varchar(30)NOT NULL,
 	Alias varchar(30),
 	Weight int NOT NULL,
-	heigh int NOT NULL,
-	reach int NOT NULL,
+	Heigh int NOT NULL,
+	Reach int NOT NULL,
 	Styles_id int FOREIGN KEY REFERENCES Styles(id),
 	Gears_id int FOREIGN KEY REFERENCES Gears(id),
+	Clubs_id int FOREIGN KEY REFERENCES Clubs(id),
 	Age int NOT NULL,
 	Address varchar(45)NOT NULL,
 	Tel_Number int,
 	Salary int,
 	Licence_Number varchar(45)
-	
 )
 
 create table Status (
@@ -110,13 +116,13 @@ create table Titles (
 create table Fights (
     id int NOT NULL PRIMARY KEY,
 	Number_fight int NOT NULL UNIQUE,
-	contry varchar(45),
-	town varchar(45),
-	address varchar(45),
-	date_fight date,
-	category varchar(45),
-	loser varchar(45),
-	winner varchar(45),
+	Contry varchar(45),
+	Town varchar(45),
+	Address varchar(45),
+	Date_fight date,
+	Category varchar(45),
+	Loser varchar(45),
+	Winner varchar(45),
 	Sport_type varchar(45),
 	Result_fight varchar(45),
 	Titles_id int FOREIGN KEY REFERENCES Titles(id)
@@ -125,20 +131,12 @@ create table Fights (
 
 create table Fighters_has_Fights (
 	Fighters_id int FOREIGN KEY REFERENCES Fighters(id),
-    Fight_id int FOREIGN KEY REFERENCES Fights(id)
+    Fights_id int FOREIGN KEY REFERENCES Fights(id)
 )
-
 
 create table Fighters_has_Statistics (
     Fighters_id int FOREIGN KEY REFERENCES Fighters(id),
     Statistics_id int FOREIGN KEY REFERENCES "Statistics"(id)
-)
-
-create table Clubs (
-	 id int NOT NULL PRIMARY KEY,
-	 Name varchar(45) NOT NULL,
-	 Licence_Number varchar(45) NOT NULL UNIQUE,
-	 Seniority DATE
 )
 
 
