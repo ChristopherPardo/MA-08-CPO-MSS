@@ -46,7 +46,7 @@ create table Clubs (
 	 id int NOT NULL PRIMARY KEY,
 	 Name varchar(45) NOT NULL,
 	 Licence_Number varchar(45) NOT NULL UNIQUE,
-	 Seniority DATE
+
 )
 
 create table Fighters (
@@ -57,9 +57,9 @@ create table Fighters (
 	Weight int NOT NULL,
 	Height int NOT NULL,
 	Reach int NOT NULL,
-	Styles_id int FOREIGN KEY REFERENCES Styles(id),
-	Gears_id int FOREIGN KEY REFERENCES Gears(id),
-	Clubs_id int FOREIGN KEY REFERENCES Clubs(id),
+	Styles_id int FOREIGN KEY REFERENCES Styles(id) ON DELETE CASCADE,
+	Gears_id int FOREIGN KEY REFERENCES Gears(id) ON DELETE CASCADE,
+	Clubs_id int FOREIGN KEY REFERENCES Clubs(id) ON DELETE CASCADE,
 	Age int NOT NULL,
 	Address varchar(45)NOT NULL,
 	Tel_Number int,
@@ -116,7 +116,7 @@ create table Titles (
 create table Fights (
     id int NOT NULL PRIMARY KEY,
 	Number_fight int NOT NULL UNIQUE,
-	Contry varchar(45),
+	Country varchar(45),
 	Town varchar(45),
 	Address varchar(45),
 	Date_fight date,
@@ -125,7 +125,7 @@ create table Fights (
 	Winner varchar(45),
 	Sport_type varchar(45),
 	Result_fight varchar(45),
-	Titles_id int FOREIGN KEY REFERENCES Titles(id)
+	Titles_id int FOREIGN KEY REFERENCES Titles(id)ON DELETE CASCADE
 	
 )
 
