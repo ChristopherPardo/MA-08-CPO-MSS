@@ -1,3 +1,9 @@
+/*
+ * Authors : Christopher Miguel
+ * Project : Sports de combat
+ * Date : 26.01.2020
+*/
+
 Use SportsDeCombat
 
 --Clubs
